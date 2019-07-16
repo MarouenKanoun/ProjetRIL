@@ -41,7 +41,10 @@ public class Plante {
 	public void setVitesseAttaquePlante(String vitesseAttaquePlante) {
 		VitesseAttaquePlante = vitesseAttaquePlante;
 	}
-	
+	public  String Attaque(String MonAttaque)
+	{
+		return "Je fait mon Attaque de "+ MonAttaque ;
+	}
 	
 
 }

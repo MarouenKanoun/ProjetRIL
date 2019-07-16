@@ -1,5 +1,6 @@
 package game;
 
+
 public interface Game
 {
     public void start();
@@ -8,4 +9,6 @@ public interface Game
     public void save();
     public void suspend();
     public void resume();
+    
+    
 }
