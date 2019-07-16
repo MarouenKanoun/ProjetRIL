@@ -18,5 +18,7 @@ public class Main {
        System.out.println("je suis une soleil ma vitesse est " + GrosseSoleil.getVitesseAttaquePlante() +" mes degas sont "+ GrosseSoleil.getDegasPlante() + " voila ce que je peut faire  :" + GrosseSoleil.Planter());
        System.out.println("----------------------------------------------------------------------------");
        GrossePoire.LanceBoule(10);
+     //  PanelLocal panel = new PanelLocal();
+      // panel.ajouterCasesBlanches(x);
 }
 }
