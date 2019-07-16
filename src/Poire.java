@@ -1,6 +1,8 @@
+import java.util.Random;
 
 public class Poire extends Plante 
 {
+	private int n;
 	public Poire()
 	{
 	    super();
@@ -8,4 +10,12 @@ public class Poire extends Plante
 	    this.setDegasPlante(10);
 		
 	}
+	  public void LanceBoule(Integer VitesseAttaque)
+	  {
+	        n = VitesseAttaque;
+	        for(int i = 1; i <= VitesseAttaque; i++)
+	        {
+	          System.out.println("je lance ma boule  "+i);
+	        }
+	  }
 }

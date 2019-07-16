@@ -5,7 +5,7 @@ public class Main {
 		// TODO Auto-generated method stub
        Plante GrossePlante = new Plante();
        Plante GrosseNoix=new Noix();
-       Plante GrossePoire=new Poire();
+      Poire GrossePoire=new Poire();
        Soleil GrosseSoleil= new Soleil();
        
        System.out.println(GrossePlante.Attaque("La Grosse Boule"));
@@ -16,6 +16,7 @@ public class Main {
        System.out.println("je suis une poire est mes degas sont " +GrossePoire.getDegasPlante());
        System.out.println("----------------------------------------------------------------------------");
        System.out.println("je suis une soleil ma vitesse est " + GrosseSoleil.getVitesseAttaquePlante() +" mes degas sont "+ GrosseSoleil.getDegasPlante() + " voila ce que je peut faire  :" + GrosseSoleil.Planter());
-
+       System.out.println("----------------------------------------------------------------------------");
+       GrossePoire.LanceBoule(10);
 }
 }

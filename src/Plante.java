@@ -1,10 +1,10 @@
 
 public class Plante {
 	
-
 	private Boolean EstVivante;
 	//private String NomPlante;
-	private String ViePlante;
+	
+	private Integer ViePlante;
 	private Integer DegasPlante;
 	private Integer VitesseAttaquePlante;
 	
@@ -14,14 +14,7 @@ public class Plante {
 	public void setEstVivante(Boolean estVivante) {
 		EstVivante = estVivante;
 	}
-
-	public String getViePlante() {
-		return ViePlante;
-	}
-	public void setViePlante(String viePlante) {
-		ViePlante = viePlante;
-	}
-	public  String Attaque(String MonAttaque)
+    public  String Attaque(String MonAttaque)
 	{
 		return "Je fait mon Attaque de "+ MonAttaque ;
 	}
@@ -36,6 +29,12 @@ public class Plante {
 	}
 	public void setDegasPlante(Integer degasPlante) {
 		DegasPlante = degasPlante;
+	}
+	public Integer getViePlante() {
+		return ViePlante;
+	}
+	public void setViePlante(Integer viePlante) {
+		ViePlante = viePlante;
 	}
 
 	
