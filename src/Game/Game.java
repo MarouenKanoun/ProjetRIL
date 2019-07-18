@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+<<<<<<< HEAD
 public class Game extends JFrame 
 {
     public static JButton Memoire = null;
@@ -16,7 +17,17 @@ public class Game extends JFrame
     public static Poire pois=new Poire();
     
     public Game()
+=======
+public class Game extends JFrame {
+	public static JButton BoutonMemoire = null;
+	public static Plante PlanteEnMemoire = null;
+	public static CaseData[][] CaseDatas;
+
+	public Game()
+>>>>>>> 1ded4b382293a9bc10718ed9ea9a8db98ca016b8
     {
+    	CaseDatas = new CaseData [5][9];
+    	
     	//Resize icon----------------
     	//ImageIcon icon = new ImageIcon(new ImageIcon("image/NOIX.png").getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
     	ImageIcon iconNoix = new ImageIcon(new ImageIcon("image/NOIX.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));    
@@ -47,7 +58,7 @@ public class Game extends JFrame
                 }
                 if ( i == 0 && j ==0) 
                 {
-                	Memoire = jb;
+                	BoutonMemoire = jb;
                 	rentre = true;
                 }
                 if ( i == largeurMax-1 && j ==6) 
@@ -84,6 +95,7 @@ public class Game extends JFrame
                     
                     
                 }
+<<<<<<< HEAD
                 if(!rentre)
                 	clickActionSetPlante(jb);
                 
@@ -91,38 +103,47 @@ public class Game extends JFrame
                 }
           
             
+=======
+                if(!rentre) {
+                	CaseData cd = new CaseData();
+                	cd.jButton = jb;
+                	clickActionSetPlante(cd);
+                }
+            }
+>>>>>>> 1ded4b382293a9bc10718ed9ea9a8db98ca016b8
             
         }
         this.setContentPane(container);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    public static void main(String[] args) 
-    {
-        Game gl = new Game();
-    }
-    
-    public static void clickActionGetPlante(JButton jb, Plante toset) {
-    	jb.addMouseListener(new MouseListener() {
-        	@Override
-        	public void mouseClicked(MouseEvent e ){}
+
+	public static void main(String[] args) {
+		Game gl = new Game();
+	}
+
+	public static void clickActionGetPlante(JButton jb, Plante toset) {
+		jb.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				Memoire.setIcon(jb.getIcon());
+				BoutonMemoire.setIcon(jb.getIcon());
 				PlanteEnMemoire = toset;
 				 JOptionPane.showMessageDialog(null, pois.LanceBoule(5));
 			}
@@ -131,39 +152,51 @@ public class Game extends JFrame
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 			}
-        } );
-    }
-    
-    public static void clickActionSetPlante(JButton jb) {
-    	jb.addMouseListener(new MouseListener() {
-        	@Override
-        	public void mouseClicked(MouseEvent e ){}
+		});
+	}
+
+	public static void clickActionSetPlante(CaseData cd) {
+		jb.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+<<<<<<< HEAD
 				jb.setIcon(Memoire.getIcon());
 			
+=======
+				cd.jButton.setIcon(BoutonMemoire.getIcon());
+				// PlanteEnMemoire = toset;
+>>>>>>> 1ded4b382293a9bc10718ed9ea9a8db98ca016b8
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 			}
+<<<<<<< HEAD
        
     } );
     	
     }
+=======
+		});
+	}
+
+>>>>>>> 1ded4b382293a9bc10718ed9ea9a8db98ca016b8
 }

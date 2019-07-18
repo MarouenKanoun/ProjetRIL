@@ -1,6 +1,6 @@
 package plantsVSZombies;
 
-abstract class ZombieGeneric {
+public class ZombieGeneric {
 	public int pv;
 	public int speed;
 	public String imageZombie;
