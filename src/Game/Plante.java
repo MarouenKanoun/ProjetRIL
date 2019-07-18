@@ -45,6 +45,7 @@ public class Plante {
 	public void setCout(Integer cout) {
 		Cout = cout;
 	}
+	
 
 	
 	
