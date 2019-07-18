@@ -1,11 +1,11 @@
 package Game;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
@@ -13,6 +13,8 @@ public class Game extends JFrame
 {
     public static JButton Memoire = null;
     public static Plante PlanteEnMemoire = null;
+    public static Poire pois=new Poire();
+    
     public Game()
     {
     	//Resize icon----------------
@@ -20,9 +22,8 @@ public class Game extends JFrame
     	ImageIcon iconNoix = new ImageIcon(new ImageIcon("image/NOIX.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));    
     	ImageIcon iconPoire = new ImageIcon(new ImageIcon("image/poire.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
     	ImageIcon iconSoleil = new ImageIcon(new ImageIcon("image/soleil.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
-    	//-----------------------
-    	//ImageIcon IC = new ImageIcon();
-        JPanel container = new JPanel();
+    	
+    	  JPanel container = new JPanel();
         int largeurMax = 7;
         int longueurMax = 11;
         this.setTitle("Grid Layout");
@@ -63,7 +64,14 @@ public class Game extends JFrame
                     jb.setEnabled(true); 
                 	rentre = true;
                    // JOptionPane.showMessageDialog(null, "je suis une pois  ");
-                    clickActionGetPlante(jb, new Poire());
+                	  
+                    clickActionGetPlante(jb, pois);
+                     
+                    
+                }
+                if ( i == 0 && j ==10) 
+                {
+               jb.setText("Score " + "var1 "+"var2 ");
                 }
                 if ( i == largeurMax-1 && j ==4) 
                 {
@@ -78,7 +86,11 @@ public class Game extends JFrame
                 }
                 if(!rentre)
                 	clickActionSetPlante(jb);
+                
+             
                 }
+          
+            
             
         }
         this.setContentPane(container);
@@ -112,6 +124,7 @@ public class Game extends JFrame
 				// TODO Auto-generated method stub
 				Memoire.setIcon(jb.getIcon());
 				PlanteEnMemoire = toset;
+				 JOptionPane.showMessageDialog(null, pois.LanceBoule(5));
 			}
 
 			@Override
@@ -142,13 +155,15 @@ public class Game extends JFrame
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				jb.setIcon(Memoire.getIcon());
-				//PlanteEnMemoire = toset;
+			
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 			}
-        } );
+       
+    } );
+    	
     }
 }

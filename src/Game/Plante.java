@@ -1,10 +1,9 @@
 package Game;
 
-public class Plante {
+public  class Plante {
 	
 	private Boolean EstVivante;
-	//private String NomPlante;
-	
+	private Integer Cout;
 	private Integer ViePlante;
 	private Integer DegasPlante;
 	private Integer VitesseAttaquePlante;
@@ -36,6 +35,12 @@ public class Plante {
 	}
 	public void setViePlante(Integer viePlante) {
 		ViePlante = viePlante;
+	}
+	public Integer getCout() {
+		return Cout;
+	}
+	public void setCout(Integer cout) {
+		Cout = cout;
 	}
 
 	
