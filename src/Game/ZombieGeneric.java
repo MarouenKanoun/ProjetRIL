@@ -1,4 +1,4 @@
-package plantsVSZombies;
+package Game;
 
 public class ZombieGeneric {
 	public int pv;

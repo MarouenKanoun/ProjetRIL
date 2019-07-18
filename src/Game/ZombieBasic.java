@@ -1,4 +1,4 @@
-package plantsVSZombies;
+package Game;
 
 public class ZombieBasic extends ZombieGeneric {
 	private final static String zombieImage = "image/zombie_base.png";

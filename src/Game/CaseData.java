@@ -1,6 +1,4 @@
 package Game;
-import plantsVSZombies.ZombieGeneric;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,6 @@ public class CaseData {
 	
 	
 	public CaseData() {
-		
+
 	}
 }

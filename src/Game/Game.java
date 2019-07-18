@@ -13,9 +13,13 @@ public class Game extends JFrame {
 	public static JButton BoutonMemoire = null;
 	public static Plante PlanteEnMemoire = null;
 	public static CaseData[][] CaseDatas;
+	public static Zombie Zombie;
 
 	public Game()
     {
+			
+
+		
     	CaseDatas = new CaseData [5][9];
     	
     	//Resize icon----------------
@@ -129,7 +133,7 @@ public class Game extends JFrame {
 	}
 
 	public static void clickActionSetPlante(CaseData cd) {
-		jb.addMouseListener(new MouseListener() {
+		cd.jButton.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
@@ -149,14 +153,21 @@ public class Game extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				cd.jButton.setIcon(BoutonMemoire.getIcon());
+//				cd.jButton.setIcon(BoutonMemoire.getIcon());
 				// PlanteEnMemoire = toset;
+				if (cd.p == null) {
+					cd.jButton.setIcon(BoutonMemoire.getIcon());
+					cd.p = PlanteEnMemoire;
+				}
+				;
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 			}
+
 		});
 	}
 
