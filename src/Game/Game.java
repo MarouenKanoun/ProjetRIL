@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
@@ -15,13 +16,11 @@ public class Game extends JFrame {
 	public static JButton BoutonTour = null;
 	public static Plante PlanteEnMemoire = null;
 	public static CaseData[][] CaseDatas;
-	public static Zombie Zombie;
-	public static int Tour = 0;
-	public static boolean Loose = false;
+	public int Tour = 19;
+	public boolean Loose = false;
+	public boolean Run = true;
 
 	public Game() {
-		
-		
 
 		CaseDatas = new CaseData[5][9];
 
@@ -91,6 +90,8 @@ public class Game extends JFrame {
 					CaseData cd = new CaseData();
 					cd.jButton = jb;
 					clickActionSetPlante(cd);
+					rentre = true;
+					CaseDatas[i - 1][j - 1] = cd;
 				}
 			}
 
@@ -102,22 +103,56 @@ public class Game extends JFrame {
 
 	public static void main(String[] args) {
 		Game gl = new Game();
-		while(Tour < 100  && Loose == false) {
-			gl.nextTurn();
+		gl.Play();
+	}
+
+	public void Play() {
+		while (Tour < 100 && Loose == false) {
+			this.nextTurn();
 			try {
 				TimeUnit.SECONDS.sleep(3);
-				
+
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	public void nextTurn() {
 		Tour++;
 		BoutonTour.setText(Integer.toString(Tour));
+
+		// Zombie action
+
+		for (int i = 1; i < CaseDatas.length; i++) {
+			for (int j = 1; j < CaseDatas[0].length; j++) {
+				if (CaseDatas[i][j].Zombie != null && CaseDatas[i][j - 1].plante == null
+						&& CaseDatas[i][j - 1].Zombie == null) {
+					CaseDatas[i][j - 1].jButton.setIcon(CaseDatas[i][j].jButton.getIcon());
+					CaseDatas[i][j].jButton.setIcon(null);
+					CaseDatas[i][j - 1].Zombie = CaseDatas[i][j].Zombie;
+					CaseDatas[i][j].Zombie = null;
+				}
+			}
+
+		}
+
+		for (int i = 0; i < Zombie.spawnZombies(Tour); i++) {
+
+//			Zombie spawn
+
+			Random Rand = new Random();
+			int spawnCase = Rand.nextInt(5);
+			ZombieBasic.spawn(new ZombieBasic(), CaseDatas[spawnCase][8].jButton);
+
+			CaseDatas[spawnCase][8].Zombie = new ZombieBasic();
+//			Plante action
+
+		}
+
 	}
+
 	public static void clickActionGetPlante(JButton jb, Plante toset) {
 		jb.addMouseListener(new MouseListener() {
 			@Override
@@ -173,9 +208,9 @@ public class Game extends JFrame {
 				// TODO Auto-generated method stub
 //				cd.jButton.setIcon(BoutonMemoire.getIcon());
 				// PlanteEnMemoire = toset;
-				if (cd.p == null) {
+				if (cd.plante == null) {
 					cd.jButton.setIcon(BoutonMemoire.getIcon());
-					cd.p = PlanteEnMemoire;
+					cd.plante = PlanteEnMemoire;
 				}
 				;
 

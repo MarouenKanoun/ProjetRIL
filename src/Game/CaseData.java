@@ -6,8 +6,8 @@ import javax.swing.JButton;
 
 public class CaseData {
 	JButton jButton = null;
-	Plante p = null;
-	List<ZombieGeneric> Zombies = new ArrayList();
+	Plante plante = null;
+	ZombieGeneric Zombie = null;
 	
 	
 	public CaseData() {
