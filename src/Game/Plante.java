@@ -8,7 +8,7 @@ public class Plante {
 	private Integer ViePlante;
 	private Integer DegasPlante;
 	private Integer VitesseAttaquePlante;
-	
+	public Plante() {}
 	public Boolean getEstVivante() {
 		return EstVivante;
 	}
@@ -36,6 +36,7 @@ public class Plante {
 	}
 	public void setViePlante(Integer viePlante) {
 		ViePlante = viePlante;
+		
 	}
 
 	

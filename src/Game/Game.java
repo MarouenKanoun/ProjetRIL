@@ -176,7 +176,7 @@ public class Game extends JFrame {
 			for (int j = 1; j < CaseDatas[0].length; j++) {
 				if (CaseDatas[i][j].Zombie != null && CaseDatas[i][j - 1].plante != null ) {
 					Plante planteAttaquee = CaseDatas[i][j - 1].plante;
-					planteAttaquee.setViePlante(planteAttaquee.getViePlante() - CaseDatas[i][j].Zombie.degat);					
+					planteAttaquee.setViePlante( planteAttaquee.getViePlante() - CaseDatas[i][j].Zombie.degat);					
 					if (planteAttaquee.getViePlante()<= 0)
 						CaseDatas[i][j - 1].plante = null;
 				}
