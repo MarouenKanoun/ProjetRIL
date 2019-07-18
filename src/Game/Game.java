@@ -14,14 +14,18 @@ import javax.swing.*;
 public class Game extends JFrame {
 	public static JButton BoutonMemoire = null;
 	public static JButton BoutonTour = null;
+	public static JButton BoutonSolde = null;
+	
 	public static Plante PlanteEnMemoire = null;
 	public static CaseData[][] CaseDatas;
 	public int Tour = 19;
 	public boolean Loose = false;
 	public boolean Run = true;
-
+	public static  Integer SoldeGame=800;
+	
+	
 	public Game() {
-
+		
 		CaseDatas = new CaseData[5][9];
 
 		// Resize icon----------------
@@ -68,24 +72,30 @@ public class Game extends JFrame {
 					jb.setEnabled(true);
 					rentre = true;
 					// JOptionPane.showMessageDialog(null, "Noix ");
-					clickActionGetPlante(jb, new Noix());
+					Noix MaNoix=new Noix();
+					clickActionGetPlante(jb, MaNoix, MaNoix.getCout(),SoldeGame);
 				}
 				if (i == largeurMax - 1 && j == 5) {
 					jb.setIcon(new ImageIcon(iconPoire.getImage()));
 					jb.setEnabled(true);
 					rentre = true;
 					// JOptionPane.showMessageDialog(null, "je suis une pois ");
-					clickActionGetPlante(jb, new Poire());
+					Poire MaPois= new Poire();
+					clickActionGetPlante(jb, MaPois,MaPois.getCout(),SoldeGame);
 				}
 				if (i == largeurMax - 1 && j == 4) {
 					jb.setIcon(new ImageIcon(iconSoleil.getImage()));
 					jb.setEnabled(true);
 					rentre = true;
-					// IC.setImage(getIconImage());
-					// jb.addActionListener(this);
-					clickActionGetPlante(jb, new Soleil());
+					Soleil MonSoleil = new Soleil();
+					clickActionGetPlante(jb,MonSoleil,MonSoleil.getCout(),SoldeGame);
 
 				}
+				if (i == 0 && j == 10) {
+					BoutonSolde = jb;
+					jb.setText("Solde "+SoldeGame);
+				}
+				
 				if (!rentre) {
 					CaseData cd = new CaseData();
 					cd.jButton = jb;
@@ -111,6 +121,8 @@ public class Game extends JFrame {
 			this.nextTurn();
 			try {
 				TimeUnit.SECONDS.sleep(3);
+				
+				//CaseDatas[4][5].jButton.setText("test"); 
 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -133,6 +145,8 @@ public class Game extends JFrame {
 					CaseDatas[i][j].jButton.setIcon(null);
 					CaseDatas[i][j - 1].Zombie = CaseDatas[i][j].Zombie;
 					CaseDatas[i][j].Zombie = null;
+					
+
 				}
 			}
 
@@ -153,7 +167,7 @@ public class Game extends JFrame {
 
 	}
 
-	public static void clickActionGetPlante(JButton jb, Plante toset) {
+	public static void clickActionGetPlante(JButton jb, Plante toset,int coutPlante,int Credit) {
 		jb.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -172,11 +186,20 @@ public class Game extends JFrame {
 			}
 
 			@Override
-			public void mousePressed(MouseEvent arg0) {
+			public void mousePressed(MouseEvent arg0) 
+			{
 				// TODO Auto-generated method stub
+				if (Credit<coutPlante)
+				{
+					javax.swing.JOptionPane.showMessageDialog(null,"you can't"); 
+			    }
+				else
+				{
 				BoutonMemoire.setIcon(jb.getIcon());
 				PlanteEnMemoire = toset;
-			}
+				
+				}
+			   }
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -208,9 +231,13 @@ public class Game extends JFrame {
 				// TODO Auto-generated method stub
 //				cd.jButton.setIcon(BoutonMemoire.getIcon());
 				// PlanteEnMemoire = toset;
-				if (cd.plante == null) {
+				
+				if (cd.plante == null && SoldeGame >= PlanteEnMemoire.getCout()) {
 					cd.jButton.setIcon(BoutonMemoire.getIcon());
 					cd.plante = PlanteEnMemoire;
+				   SoldeGame=SoldeGame- PlanteEnMemoire.getCout();
+				   BoutonSolde.setText("Solde "+SoldeGame);
+				   
 				}
 				;
 

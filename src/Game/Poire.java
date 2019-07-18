@@ -9,6 +9,7 @@ public class Poire extends Plante
 	    super();
 	    this.setVitesseAttaquePlante(10);
 	    this.setDegasPlante(10);
+	    this.setCout(100);
 		
 	}
 	  public void LanceBoule(Integer VitesseAttaque)

@@ -8,6 +8,8 @@ public class Plante {
 	private Integer ViePlante;
 	private Integer DegasPlante;
 	private Integer VitesseAttaquePlante;
+	private Integer Cout;
+	
 	
 	public Boolean getEstVivante() {
 		return EstVivante;
@@ -36,6 +38,12 @@ public class Plante {
 	}
 	public void setViePlante(Integer viePlante) {
 		ViePlante = viePlante;
+	}
+	public Integer getCout() {
+		return Cout;
+	}
+	public void setCout(Integer cout) {
+		Cout = cout;
 	}
 
 	

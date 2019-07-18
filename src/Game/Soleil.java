@@ -7,6 +7,7 @@ public class Soleil extends Plante
 		    super();
 		    this.setVitesseAttaquePlante(20);
 		    this.setDegasPlante(1);
+		    this.setCout(50);
 		    
 	  } 
 	  public String Planter()
