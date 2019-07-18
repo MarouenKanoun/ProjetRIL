@@ -7,6 +7,7 @@ public class Poire extends Plante
 	public Poire()
 	{
 	    super();
+	    this.setViePlante(100);
 	    this.setVitesseAttaquePlante(10);
 	    this.setDegasPlante(10);
 		

@@ -16,9 +16,11 @@ public class Game extends JFrame {
 	public static JButton BoutonTour = null;
 	public static Plante PlanteEnMemoire = null;
 	public static CaseData[][] CaseDatas;
-	public int Tour = 19;
-	public boolean Loose = false;
+	public static int Tour = 19;
+	public static boolean Lose = false;
 	public boolean Run = true;
+	public JPanel container = new JPanel();
+	public int tempsTour = 1;
 
 	public Game() {
 
@@ -36,7 +38,7 @@ public class Game extends JFrame {
 				new ImageIcon("image/soleil.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 		// -----------------------
 		// ImageIcon IC = new ImageIcon();
-		JPanel container = new JPanel();
+
 		int largeurMax = 7;
 		int longueurMax = 11;
 		this.setTitle("Grid Layout");
@@ -89,10 +91,13 @@ public class Game extends JFrame {
 				if (!rentre) {
 					CaseData cd = new CaseData();
 					cd.jButton = jb;
-					clickActionSetPlante(cd);
+					if (j != 9)
+						clickActionSetPlante(cd);
 					rentre = true;
 					CaseDatas[i - 1][j - 1] = cd;
+
 				}
+
 			}
 
 		}
@@ -102,21 +107,45 @@ public class Game extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Game gl = new Game();
-		gl.Play();
+		boolean wantContinue = true;
+		while (wantContinue) {
+			Tour = 0;
+			Lose = false;
+			Game gl = new Game();
+			String response = gl.Play();
+			// display the showOptionDialog
+			Object[] options = { "YES", "NO" };
+			int choice = JOptionPane.showOptionDialog(null, response + " Would you like to restart?", "Restart",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+			// interpret the user's choice
+			if (choice == JOptionPane.NO_OPTION) {
+				wantContinue = false;
+				System.exit(0);
+			} else {
+				wantContinue = true;
+			}
+		}
+
 	}
 
-	public void Play() {
-		while (Tour < 100 && Loose == false) {
+	public String Play() {
+		while (Tour < 100 && Lose == false) {
 			this.nextTurn();
 			try {
-				TimeUnit.SECONDS.sleep(3);
+				TimeUnit.SECONDS.sleep(tempsTour);
 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 		}
+		if (Lose)
+			return "Tu as perdu Bouh";
+
+		return "Tu as gagné GG";
+
 	}
 
 	public void nextTurn() {
@@ -124,19 +153,8 @@ public class Game extends JFrame {
 		BoutonTour.setText(Integer.toString(Tour));
 
 		// Zombie action
-
-		for (int i = 1; i < CaseDatas.length; i++) {
-			for (int j = 1; j < CaseDatas[0].length; j++) {
-				if (CaseDatas[i][j].Zombie != null && CaseDatas[i][j - 1].plante == null
-						&& CaseDatas[i][j - 1].Zombie == null) {
-					CaseDatas[i][j - 1].jButton.setIcon(CaseDatas[i][j].jButton.getIcon());
-					CaseDatas[i][j].jButton.setIcon(null);
-					CaseDatas[i][j - 1].Zombie = CaseDatas[i][j].Zombie;
-					CaseDatas[i][j].Zombie = null;
-				}
-			}
-
-		}
+		this.moveZombie();
+		this.actionZombie();
 
 		for (int i = 0; i < Zombie.spawnZombies(Tour); i++) {
 
@@ -151,6 +169,44 @@ public class Game extends JFrame {
 
 		}
 
+	}
+	
+	private void actionZombie() {
+		for (int i = 0; i < CaseDatas.length; i++) {
+			for (int j = 1; j < CaseDatas[0].length; j++) {
+				if (CaseDatas[i][j].Zombie != null && CaseDatas[i][j - 1].plante != null ) {
+					Plante planteAttaquee = CaseDatas[i][j - 1].plante;
+					planteAttaquee.setViePlante(planteAttaquee.getViePlante() - CaseDatas[i][j].Zombie.degat);					
+					if (planteAttaquee.getViePlante()<= 0)
+						CaseDatas[i][j - 1].plante = null;
+				}
+			}
+		}
+		
+	}
+
+	public void moveZombie(){
+		for (int i = 0; i < CaseDatas.length; i++) {
+			if (CaseDatas[i][0].Zombie != null) {
+				Run = false;
+				Lose = true;
+
+				return;
+
+			}
+			for (int j = 1; j < CaseDatas[0].length; j++) {
+				if (CaseDatas[i][j].Zombie != null && CaseDatas[i][j - 1].plante == null
+						&& CaseDatas[i][j - 1].Zombie == null) {
+					CaseDatas[i][j - 1].jButton.setIcon(CaseDatas[i][j].jButton.getIcon());
+					CaseDatas[i][j].jButton.setIcon(null);
+					CaseDatas[i][j - 1].Zombie = CaseDatas[i][j].Zombie;
+					CaseDatas[i][j].Zombie = null;
+
+				}
+
+			}
+
+		}
 	}
 
 	public static void clickActionGetPlante(JButton jb, Plante toset) {
@@ -208,7 +264,7 @@ public class Game extends JFrame {
 				// TODO Auto-generated method stub
 //				cd.jButton.setIcon(BoutonMemoire.getIcon());
 				// PlanteEnMemoire = toset;
-				if (cd.plante == null) {
+				if (cd.plante == null && cd.Zombie == null) {
 					cd.jButton.setIcon(BoutonMemoire.getIcon());
 					cd.plante = PlanteEnMemoire;
 				}
