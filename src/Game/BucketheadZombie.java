@@ -1,7 +1,7 @@
 package Game;
 
 public class BucketheadZombie extends ZombieGeneric {
-	private final static String zombieImage = "image/BucketheadZombie.png";
+	private final static String zombieImage = "src/Game/BucketheadZombie.png";
 	private final static int health = 1300;
 	private final static int speed = 10;
 	private final static int hitPoint = 100;

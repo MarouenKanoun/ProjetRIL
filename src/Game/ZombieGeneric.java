@@ -3,7 +3,6 @@ package Game;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 public class ZombieGeneric {
 	public int Pv;
@@ -14,7 +13,7 @@ public class ZombieGeneric {
 	public int Score;
 	public boolean CanAction;
 	public String Name;
-	ImageIcon IconZombie;
+	public ImageIcon IconZombie;
 	public String ImageZombie;
 
 

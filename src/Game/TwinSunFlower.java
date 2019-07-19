@@ -7,7 +7,7 @@ public class TwinSunFlower extends Plante
   	public int sunValue = 100;
 	public TwinSunFlower()
 	{
-		  super(300,24,0,150, "image/TwinSunFlower.png", "image/TwinSunFlowerOpaque.png",desc);
+		  super(300,24,0,150, "src/Game/TwinSunFlower.png", "src/Game/TwinSunFlowerOpaque.png",desc);
 	}
 
 	@Override
@@ -20,9 +20,9 @@ public class TwinSunFlower extends Plante
 
 		 Cooldown--;
 		 if(Cooldown == 0) {
-			 gl.SoldeSoleil += sunValue;
-			 gl.RefreshGarden();
-			 gl.BoutonSoldeSoleil.setText(gl.SoldeSoleil +" Soleils");
+			 Game.SoldeSoleil += sunValue;
+			 Game.RefreshGarden();
+			 Game.BoutonSoldeSoleil.setText(Game.SoldeSoleil +" Soleils");
 			 Cooldown = CooldownDefault;
 			 return 0;
 		 }

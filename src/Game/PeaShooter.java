@@ -7,7 +7,7 @@ public class PeaShooter extends Plante
 
   	public PeaShooter()
   	{
-  	    super(300,3,20, 100, "image/PeaShooter.png","image/PeaShooterOpaque.png",desc);
+  	    super(300,3,20, 100, "src/Game/PeaShooter.png","src/Game/PeaShooterOpaque.png",desc);
 
   	}
 

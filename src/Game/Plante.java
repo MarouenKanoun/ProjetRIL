@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 import javax.swing.*;
-public class Plante {
+public abstract class Plante {
 
 	public int ViePlante;
   	public int Cooldown;

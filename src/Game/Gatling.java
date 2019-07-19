@@ -7,7 +7,7 @@ public class Gatling extends Plante
 
   	public Gatling()
   	{
-  	    super(300,3,20,400, "image/Gatling.png","image/GatlingOpaque.png",desc);
+  	    super(300,3,20,400, "src/Game/Gatling.png","src/Game/GatlingOpaque.png",desc);
 
   	}
 

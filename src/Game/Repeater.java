@@ -7,7 +7,7 @@ public class Repeater extends Plante
 	public static String desc = "Repeater : Attaque 2 fois à 20 dégats/tir ";
   	public Repeater()
   	{
-  	    super(300,3,20, 200, "image/Repeater.png",  "image/RepeaterOpaque.png", desc);
+  	    super(300,3,20, 200, "src/Game/Repeater.png",  "src/Game/RepeaterOpaque.png", desc);
 
   	}
 

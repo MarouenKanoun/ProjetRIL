@@ -6,7 +6,7 @@ public class Shovel extends Plante
 
   	public Shovel()
   	{
-  	    super(0,0,0,0,"image/Shovel.png","image/Shovel.png",desc);
+  	    super(0,0,0,0,"src/Game/Shovel.png","src/Game/Shovel.png",desc);
 
   	}
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Game extends JFrame {
 	
 	public static final Plante[] TableauDePlante = new Plante[]{

@@ -8,7 +8,7 @@ public class CherryBomb extends Plante
 	public static String desc = "Cette plante n'attaque pas, elle ne sert qu'à ralentir les zombies";
 	  public CherryBomb()
 	  {
-		    super(10000000,2,1800,150, "image/CherryBomb.png",  "image/CherryBomb.png", desc);
+		    super(10000000,2,1800,150, "src/Game/CherryBomb.png",  "src/Game/CherryBomb.png", desc);
 	  }
 
 	  @Override

@@ -1,7 +1,7 @@
 package Game;
 
 public class Gargantuar extends ZombieGeneric {
-	private final static String zombieImage = "image/Gargantuar.png";
+	private final static String zombieImage = "src/Game/Gargantuar.png";
 	private final static int health = 3600;
 	private final static int speed = 14;
 	private final static int hitPoint = 4000;
