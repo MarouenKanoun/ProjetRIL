@@ -2,9 +2,13 @@ package Game;
 
 public class CherryBomb extends Plante
 {
+	// Plante pas entierement implimenté donc retirer du jeu
+	
+
+	public static String desc = "Cette plante n'attaque pas, elle ne sert qu'à ralentir les zombies";
 	  public CherryBomb()
 	  {
-		    super(10000000,2,1800,150, "image/CherryBomb.png");
+		    super(10000000,2,1800,150, "image/CherryBomb.png",  "image/CherryBomb.png", desc);
 	  }
 
 	  @Override

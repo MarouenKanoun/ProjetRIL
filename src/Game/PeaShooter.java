@@ -2,11 +2,12 @@ package Game;
 
 public class PeaShooter extends Plante
 {
+	public static String desc = "PeaShooter : Attaque 1 fois à 20 dégats/tir ";
   	public final int NombreDeTir = 1;
 
   	public PeaShooter()
   	{
-  	    super(300,3,20, 100, "image/PeaShooter.png");
+  	    super(300,3,20, 100, "image/PeaShooter.png","image/PeaShooterOpaque.png",desc);
 
   	}
 

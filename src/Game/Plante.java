@@ -1,6 +1,6 @@
 package Game;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 
 import javax.swing.*;
 public class Plante {
@@ -10,15 +10,19 @@ public class Plante {
   	public int CooldownDefault;
 	public int Price;
 	public int DegatPlante;
+	public String Description;
 	public ImageIcon ImagePlante;
-	public Plante(int vie, int vitesse, int degat,  int price, String pathImage) {
+	public ImageIcon ImagePlanteOpaque;
+	public Plante(int vie, int vitesse, int degat,  int price, String pathImage, String pathImageOpaque,String description) {
 		ViePlante = vie;
 		DegatPlante = degat;
 		Cooldown = 0;
 		CooldownDefault = vitesse;
 		Price = price;
+		Description = description+" Price : "+ price;
 		ImagePlante = new ImageIcon(new ImageIcon(pathImage).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
-	}
+		ImagePlanteOpaque = new ImageIcon(new ImageIcon(pathImageOpaque).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+		}
 
 	public int getDegatPlante() {
 		return DegatPlante;

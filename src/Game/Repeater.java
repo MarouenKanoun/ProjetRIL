@@ -4,9 +4,10 @@ public class Repeater extends Plante
 {
   	public static int NombreDeTir = 2;
 
+	public static String desc = "Repeater : Attaque 2 fois à 20 dégats/tir ";
   	public Repeater()
   	{
-  	    super(300,3,20, 200, "image/Repeater.png");
+  	    super(300,3,20, 200, "image/Repeater.png",  "image/RepeaterOpaque.png", desc);
 
   	}
 

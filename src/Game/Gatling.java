@@ -2,11 +2,12 @@ package Game;
 
 public class Gatling extends Plante
 {
+	public static String desc = "Gatling : Attaque 4 fois à 20 dégats/tir. Placement sur Repeater ";
   	public static int NombreDeTir = 4;
 
   	public Gatling()
   	{
-  	    super(300,3,20,400, "image/Gatling.png");
+  	    super(300,3,20,400, "image/Gatling.png","image/GatlingOpaque.png",desc);
 
   	}
 

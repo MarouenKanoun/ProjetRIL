@@ -13,11 +13,14 @@ public class ZombieGeneric {
 	public int Degat;
 	public int Score;
 	public boolean CanAction;
+	public String Name;
 	ImageIcon IconZombie;
 	public String ImageZombie;
 
 
-	public ZombieGeneric(int _pv, int _speed,int _degat, String _imageZombie, int _score) {
+
+	public ZombieGeneric(int _pv, int _speed,int _degat, String _imageZombie, int _score, String _name) {
+
 		Pv = _pv;
 		PvMax = _pv;
 		Degat = _degat;
@@ -25,6 +28,7 @@ public class ZombieGeneric {
 		Speed = _speed;
 		ImageZombie = _imageZombie;
 		Score = _score;
+		Name = _name;
 		IconZombie = new ImageIcon(
 				new ImageIcon(_imageZombie).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 

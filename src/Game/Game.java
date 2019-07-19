@@ -1,53 +1,53 @@
 package Game;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class Game extends JFrame {
+	
+	public static final Plante[] TableauDePlante = new Plante[]{
+			new Shovel(),
+			new SunFlower(),
+			new TwinSunFlower(),
+			new PeaShooter(),
+			new Repeater(),
+			new Gatling(),
+			new TorchWood(),
+			new Nut(),
+			new TallNut()};
+		public static final ZombieGeneric[] TableauDeZombie = new ZombieGeneric[]{
+				new Gargantuar(),
+				new BucketheadZombie(),
+				new ConeheadZombie(),
+				new Imp(),
+				new BasicZombie()};
 	public static JButton BoutonMemoire = null;
 	public static JButton BoutonTour = null;
 	public static JButton BoutonSoldeSoleil = null;
 	public static JButton BoutonScore = null;
 	public static Plante PlanteEnMemoire = null;
 	public static CaseData[][] CaseDatas;
-	public static int SoldeSoleil = 100;
-	public static int Tour = 0;
-	public static int State = 1;
-	public static int ScoreGame = 0;
+	public static CaseData[] Garden = new CaseData[9];
+	public static int SoldeSoleil;
+	public static int Tour;
+	public static int Vague;
+	public static int State;
+	public static int ScoreGame;
+
+	public static String separator = System.getProperty("line.separator");
 	public static ArrayList<ZombieGeneric> ZombieNeedToSpawn = new ArrayList<ZombieGeneric>();
 	public static int Credit = 0;
 	public final static double TauxDeMultiplication = 1.2;
-	public static boolean Lose = false;
-	public boolean Run = true;
+	public boolean lose = false;
 	public JPanel container = new JPanel();
 	public static long tempsTour = 500;
 
-	public final Plante[] TableauDePlante = new Plante[]{
-		new Shovel(),
-		new SunFlower(),
-		new TwinSunFlower(),
-		new PeaShooter(),
-		new Repeater(),
-		new Gatling(),
-		new TorchWood(),
-		new Nut(),
-		new TallNut(),
-		new CherryBomb()};
-	public final ZombieGeneric[] TableauDeZombie = new ZombieGeneric[]{
-			new Gargantuar(),
-			new BucketheadZombie(),
-			new ConeheadZombie(),
-			new Imp(),
-			new BasicZombie()};
+	
 
 	public Game() {
 
@@ -68,65 +68,98 @@ public class Game extends JFrame {
 		container.setLayout(new GridLayout(largeurMax, longueurMax));
 		for (int i = 0; i < largeurMax; i++) {
 			for (int j = 0; j < longueurMax; j++) {
+				boolean hasBeenAddJButton = false;
 				JButton jb = new JButton();
-				container.add(jb);
 				jb.setBackground(new Color(0x64FF64));
 				Boolean rentre = false;
-				if (i == 0 || i == largeurMax - 1 || j == 0 || j == longueurMax - 1) {
+				if (i == 0 ||i == largeurMax - 1||j == 0 || j == longueurMax - 1) {
 					jb.setBackground(new Color(0x00FF00));
 					jb.setEnabled(false);
 					rentre = true;
-
 				}
 				if (i == 0 && j == 0) {
 					BoutonMemoire = jb;
+					jb.setEnabled(true);
 					rentre = true;
 				}
+				if (i == 2 && j == 0) {
+					jb.setEnabled(true);  
+					jb.setIcon(new ImageIcon(new ImageIcon("image/Sun.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT)));
+					rentre = true;
+				}
+				
 				if (i == 3 && j == 0) {
 					BoutonSoldeSoleil = jb;
-					BoutonSoldeSoleil.setText(SoldeSoleil +" Soleils");
+					jb.setText(SoldeSoleil +" Soleils");
+					
 					rentre = true;
 				}
 				if (i == 0 && j == 10) {
 					BoutonScore = jb;
+					BoutonScore.setText("Score : " + ScoreGame);
 					rentre = true;
 				}
-				if (i == 0 && j == 1) {
+				if (i == 1 && j == 10) {
 					BoutonTour = jb;
 					rentre = true;
 				}
-				if(i == largeurMax - 1 && j<10) {
-					clickActionGetPlante(jb, TableauDePlante[j]);
-					jb.setIcon(TableauDePlante[j].ImagePlante);
+				
+				if (i == 0 && j>2 && j<8) {
+					jb.setIcon(TableauDeZombie[7-j].IconZombie);
+					String str = TableauDeZombie[7-j].Name + "\n : Niveau : " + (j-2)+ separator + " Vie : "+ TableauDeZombie[7-j].PvMax +separator + "\n Vitesse : " + TableauDeZombie[7-j].Cooldown;
+					jb.setToolTipText(str);
 					jb.setEnabled(true);
 					rentre = true;
 				}
+				
+				if(i == largeurMax - 1 && j>0 && j<10) {
+					clickActionGetPlante(jb, TableauDePlante[j-1]);
+					jb.setBackground(new Color(0xB8860B));
+					
+					jb.setIcon(TableauDePlante[j-1].ImagePlante);
+					jb.setEnabled(false);
+					Garden[j-1] = new CaseData();
+					Garden[j-1].JButtonCase = jb;
+					Garden[j-1].PlanteCase = TableauDePlante[j-1];
+					rentre = true;
+				}
+				
 				if (!rentre) {
 					CaseData cd = new CaseData();
 					cd.JButtonCase = jb;
+					if(j == 9)
+						jb.setBackground(new Color(0xA9A9A9));
 					if (j != 9)
 						clickActionSetPlante(cd);
 					rentre = true;
 					CaseDatas[i - 1][j - 1] = cd;
 
 				}
+				if(!hasBeenAddJButton)
+					container.add(jb);
 
 			}
 
 		}
+		RefreshGarden();
 		this.setContentPane(container);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
+	public static void Reset() {
+		Garden = new CaseData[9];
+		SoldeSoleil = 200; 
+		Tour = 0; 
+		Vague = 0;
+		Credit = 0;
+		State = 0;
+		ScoreGame = 0;	
+	}
 	public static void main(String[] args) {
 		boolean wantContinue = true;
 		while (wantContinue) {
-			ZombieNeedToSpawn = new ArrayList<ZombieGeneric>();
-			Tour = 0;
-			ScoreGame = 0;
-			Credit = 0;
-			Lose = false;
+			Reset();
 			Game gl = new Game();
 			String response = gl.Play();
 			// display the showOptionDialog
@@ -146,7 +179,7 @@ public class Game extends JFrame {
 	}
 
 	public String Play() {
-		while (ScoreGame < 20000 && Lose == false) {
+		while(!(Vague == 3 && AnyZombie()) && lose == false) {
 			this.nextTurn();
 			try {
 				Thread.sleep(tempsTour);
@@ -157,26 +190,32 @@ public class Game extends JFrame {
 			}
 
 		}
-		if (Lose)
+		if (lose)
 			return "Tu as perdu Bouh";
 
 		return "Tu as gagné GG";
 
 	}
-
+	public void SetTourBouton() {
+		int seconds = (Tour%120)/2;
+		int minutes = Tour/120;
+		if (seconds < 10)
+			BoutonTour.setText(minutes +" : 0"+ seconds +separator + "\n Vague : "+ Vague+"/3");
+		else
+			BoutonTour.setText(minutes +" : "+ seconds +separator +" Vague : "+ Vague+"/3");
+	}
 	public void nextTurn() {
 		Tour++;
-		BoutonTour.setText(Integer.toString(Tour));
+		SetTourBouton();
 		//	Plante action
-
-			actionPlante();
+		actionPlante();
 		// Zombie action
 		actionZombie();
 
 		// Zombie spawn
 		getZombiesToSpawn();
 		spawnZombies();
-
+		RefreshGarden();
 
 
 
@@ -185,7 +224,7 @@ public class Game extends JFrame {
 private void actionZombie() {
 
 		for (int i = 0; i < CaseDatas.length; i++) {
-			for (int j = 1; j < CaseDatas[0].length; j++) {
+			for (int j = 0; j < CaseDatas[0].length; j++) {
 				if(CaseDatas[i][j].ZombieCase != null)
 					if(CaseDatas[i][j].ZombieCase.Action()){
 						moveZombie(i,j);
@@ -195,6 +234,8 @@ private void actionZombie() {
 				}
 			}
 	private void attaqueZombie(int i, int j) {
+		if(j == 0)
+			return;
 		if (CaseDatas[i][j - 1].PlanteCase != null ) {
 			CaseDatas[i][j - 1].PlanteCase.ViePlante = CaseDatas[i][j - 1].PlanteCase.ViePlante - CaseDatas[i][j].ZombieCase.Degat;
 			if (CaseDatas[i][j - 1].PlanteCase.ViePlante<= 0) {
@@ -208,8 +249,7 @@ private void actionZombie() {
 
 	public void moveZombie(int i, int j) {
 		if (CaseDatas[i][0].ZombieCase != null) {
-			Run = false;
-			Lose = true;
+			lose = true;
 			return;
 		}
 		if(CaseDatas[i][j - 1].PlanteCase == null
@@ -229,7 +269,7 @@ private void actionZombie() {
 
 					int action = CaseDatas[i][j].PlanteCase.Action(this); // -1 Rien, 0 Action Sans Attque, Autre Nombre Dattaque
 					if( action >= 0) {
-						CaseDatas[i][j].JButtonCase.setEnabled(true);
+						CaseDatas[i][j].JButtonCase.setIcon(CaseDatas[i][j].PlanteCase.ImagePlante);
 						for(int atq = 0; atq < action; atq++){
 							ZombieGeneric touched = ZombieFound(i,j, false);
 							if(touched != null) {
@@ -241,13 +281,19 @@ private void actionZombie() {
 						}
 					}
 				else{
-					CaseDatas[i][j].JButtonCase.setEnabled(false);
+					CaseDatas[i][j].JButtonCase.setIcon(CaseDatas[i][j].PlanteCase.ImagePlanteOpaque);
 				 	}
 				}
 			}
 		}
 	}
-
+	public boolean AnyZombie() {
+		for (int i = 0; i < CaseDatas.length; i++) 
+			for (int j = 0; j < CaseDatas[0].length; j++) 
+				if(CaseDatas[i][j].ZombieCase != null) 
+					return false;
+		return true;
+	}
 	public ZombieGeneric ZombieFound(int _i, int _j, boolean destroy)
 	{
 			for (int j = _j; j < CaseDatas[0].length; j++) {
@@ -255,6 +301,7 @@ private void actionZombie() {
 					if(destroy) {
 						Credit += CaseDatas[_i][j].ZombieCase.Score*TauxDeMultiplication;
 						ScoreGame += CaseDatas[_i][j].ZombieCase.Score;
+						BoutonScore.setText("Score : " + ScoreGame);
 						CaseDatas[_i][j].ZombieCase = null;
 						CaseDatas[_i][j].JButtonCase.setIcon(null);}
 					return CaseDatas[_i][j].ZombieCase;}
@@ -288,10 +335,12 @@ private void actionZombie() {
 
 	public void getZombiesToSpawn()
 	{
+		if(Vague == 3)
+			return;
 		if (Tour == 60)
 			Credit += 20;
 
-		if(ScoreGame > 150 && State == 1){
+		if(ScoreGame > 150 && Vague == 0){
 			if(!ligneIsEmpty())
 				return;
 			for(int i = 0; i < 5; i++) {
@@ -299,27 +348,50 @@ private void actionZombie() {
 				zg.Score = 0;
 				ZombieNeedToSpawn.add(zg);
 				
-			}			
-			State++;
+			}		
+			Vague++;
 			return;
 		}
-		if(ScoreGame > 300 && State == 2){
-			Credit += 100;
-			State++;
-		}
-
-		if(ScoreGame > 750 && State == 3){
+		if(ScoreGame > 4500 && Vague == 1){
+			if(!ligneIsEmpty())
+				return;
+			for(int i = 0; i < 5; i++) {
+				ZombieGeneric zg = GetNewZombie(new BucketheadZombie());
+				zg.Score = 0;
+				ZombieNeedToSpawn.add(zg);
+				
+			}	
 			Credit += 500;
+			Vague++;
+		}
+		if(ScoreGame > 30000 && Vague == 2){
+			if(!ligneIsEmpty())
+				return;
+			for(int i = 0; i < 5; i++) {
+				ZombieGeneric zg = GetNewZombie(new Gargantuar());
+				zg.Score = 0;
+				ZombieNeedToSpawn.add(zg);
+				
+			}	
+			Credit += 500;
+			Vague++;
+		}
+		if(ScoreGame > 400 && State == 0){
+			Credit += 200;
 			State++;
 		}
 
-		if(ScoreGame > 4000 && State == 4){
-			Credit += 3000;
+		if(ScoreGame > 1500 && State == 1){
+			Credit += 1000;
+			State++;
+		}
+		
+		if(Vague == 2 && State == 2){
+			Credit += 5000;
 			State++;
 		}
 
-		// A regler
-		for(int i = 0; i+State-1 < TableauDeZombie.length; i++)
+		for(int i = 0; i+State < TableauDeZombie.length; i++)
 			{
 			if(Credit >= TableauDeZombie[i].Score)
 				{
@@ -342,6 +414,17 @@ public boolean ligneisRempli(){
 			return false;
 	return true;
 }
+
+public static void RefreshGarden() {
+	for(int i = 0; i < Garden.length; i++) {
+		if(SoldeSoleil >= Garden[i].PlanteCase.Price) {
+			Garden[i].JButtonCase.setEnabled(true);
+		}
+		else {
+			Garden[i].JButtonCase.setEnabled(false);
+		}
+	}
+}
 	public void spawnZombies(){
 
 		while(!ligneisRempli() && ZombieNeedToSpawn.size() > 0){
@@ -363,7 +446,7 @@ public boolean ligneisRempli(){
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-
+				jb.setToolTipText(toset.Description);
 			}
 
 			@Override
