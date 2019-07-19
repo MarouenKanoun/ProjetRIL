@@ -5,11 +5,11 @@ import java.util.List;
 import javax.swing.JButton;
 
 public class CaseData {
-	JButton jButton = null;
-	Plante plante = null;
-	ZombieGeneric Zombie = null;
-	
-	
+	JButton JButtonCase = null;
+	Plante PlanteCase = null;
+	ZombieGeneric ZombieCase = null;
+
+
 	public CaseData() {
 
 	}

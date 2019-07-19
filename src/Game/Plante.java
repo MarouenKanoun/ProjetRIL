@@ -1,45 +1,47 @@
 package Game;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
+import javax.swing.*;
 public class Plante {
-	
-	private Boolean EstVivante;
-	//private String NomPlante;
-	
-	private Integer ViePlante;
-	private Integer DegasPlante;
-	private Integer VitesseAttaquePlante;
-	public Plante() {}
-	public Boolean getEstVivante() {
-		return EstVivante;
+
+	public int ViePlante;
+  	public int Cooldown;
+  	public int CooldownDefault;
+	public int Price;
+	public int DegatPlante;
+	public ImageIcon ImagePlante;
+	public Plante(int vie, int vitesse, int degat,  int price, String pathImage) {
+		ViePlante = vie;
+		DegatPlante = degat;
+		Cooldown = 0;
+		CooldownDefault = vitesse;
+		Price = price;
+		ImagePlante = new ImageIcon(new ImageIcon(pathImage).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 	}
-	public void setEstVivante(Boolean estVivante) {
-		EstVivante = estVivante;
+
+	public int getDegatPlante() {
+		return DegatPlante;
 	}
-    public  String Attaque(String MonAttaque)
-	{
-		return "Je fait mon Attaque de "+ MonAttaque ;
+	public void setDegatPlante(int degatPlante) {
+		DegatPlante = degatPlante;
 	}
-	public Integer getVitesseAttaquePlante() {
-		return VitesseAttaquePlante;
-	}
-	public void setVitesseAttaquePlante(Integer vitesseAttaquePlante) {
-		VitesseAttaquePlante = vitesseAttaquePlante;
-	}
-	public Integer getDegasPlante() {
-		return DegasPlante;
-	}
-	public void setDegasPlante(Integer degasPlante) {
-		DegasPlante = degasPlante;
-	}
-	public Integer getViePlante() {
+	public int getViePlante() {
 		return ViePlante;
 	}
-	public void setViePlante(Integer viePlante) {
+	public void setViePlante(int viePlante) {
 		ViePlante = viePlante;
-		
 	}
 
-	
-	
+	public int Action(Game gl) {
+		return -1;
+	}
+
+	public int Attaque() {
+		return 0;
+	}
+
+
+
 
 }
